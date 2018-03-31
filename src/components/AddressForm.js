@@ -1,31 +1,9 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
 import {Ionicons} from '@expo/vector-icons';
 import Expo from 'expo';
 import {View} from 'react-native';
-import { Container, Item, Input, Header, Body, Content, Title, Button, Text } from 'native-base';
+import { Container, Header, Content, Item, Input, Icon,Body, Content, Title, Button, Text, Form } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
-
-const validate = values => {
-    const error = {};
-    error.address = '';
-    error.plz = '';
-    error.kanton = '';
-
-    var add = values.address;
-    var plz = values.plz;
-    var ktn = values.kanton;
-
-    //Error Handling
-    if(values.address === undefined){
-        ema = '';
-    }
-    if(values.plz === undefined){
-        plz = '';
-    }
-    if(values.kanton === undefined){
-        ktn = '';
-    }
-};
 
 class AddressForm extends React.Component {
     constructor(props){
@@ -33,6 +11,7 @@ class AddressForm extends React.Component {
         this.state={
             isReady: false
         };
+
         this.renderInput = this.renderInput.bind(this);
     }
     async componentWillMount(){
@@ -64,21 +43,25 @@ class AddressForm extends React.Component {
         return(
             <Container>
                 <Content padder>
-                        <Field name="address" component={this.renderInput} />
-                        <Field name="plz" component={this.renderInput} />
-                        <Field name="kanton" component={this.renderInput} />
+                    <Form form={""} onSubmit={""}>
+                        <Item stackedLabel>
+                            <Label> Adresse *</Label>
+                            <Input/>
+                        </Item>
+                        <Item stackedLabel>
+                            <Label> Postleitzahl *</Label>
+                        </Item>
                         <Item>
+                            <Label> Kanton *</Label>
                         </Item>
                         <Button block primary onPress= {reset}>
                             <Text>Submit</Text>
                         </Button>
+                    </Form>
                 </Content>
             </Container>
         )
     }
 }
 
-export default reduxForm({
-    form: 'test',
-    validate
-})(AddressForm)
+export default AddressForm
