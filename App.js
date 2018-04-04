@@ -1,73 +1,15 @@
 import React from 'react';
 import {Component} from 'react';
-import {StackNavigator, } from 'react-navigation';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import AddressForm from './src/components/AddressForm/AddressForm'
-import Header from './src/components/AppHeader/AppHeader';
+import RootStack from './src/screens/RootStack';
+import { Button } from 'react-native';
 import {Font} from 'expo';
-import SearchBar from "./src/components/SearchBar/SearchBar";
+import {Ionicons} from '@expo/vector-icons';
 
-// HomeScreen
 
-class HomeScreen extends Component {
-    static navigationsOptions = {
-        title: 'Home',
-    };
 
-    render(){
-        return(
-            <View>
-                <Button
-                    title="Go to Address form"
-                    onPress={() => this.props.navigation.navigate('Address')}
-                />
-            </View>
-        )
-    }
-
-}
-
-class AddressScreen extends Component{
-    static navigationOptions = {
-        headerTitle: 'Deine Adresse',
-    };
-    render(){
-        return(
-            <View style={{backgroundColor: '#ffffff'}}>
-                <View>
-                    <SearchBar/>
-                    <AddressForm/>
-                </View>
-            </View>
-        );
-    }
-}
 
 //Navigation
-const RootStack = StackNavigator(
-    {
-        Home: {
-            screen: HomeScreen,
-        },
-        Address: {
-            screen: AddressScreen
-        },
-    },
-    {
-        initialRouteName: 'Home',
 
-        navigationOptions:{
-            headerStyle:{
-                backgroundColor: '#D3E7F5'
-            },
-            headerTitleStyle:{
-                color: '#fff',
-                fontWeight: 'normal',
-                fontSize: 28,
-            },
-        }
-    }
-);
 
 
 
