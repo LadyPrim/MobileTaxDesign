@@ -1,63 +1,66 @@
 import React, {Component} from 'react';
-import {Platform, View, StyleSheet, TextInput, Text} from 'react-native';
-import {Constants, Location, Permissions} from 'expo';
+import {Constants} from 'expo';
+import {View} from 'react-native';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import {geocodeByAddress, geocodeByPlaceId} from 'react-native-google-places-autocomplete';
 
-class SearchBar extends Component{
-    state = {
-        location: null,
-        errorMessage: null,
-    };
+const windowSize = require('Dimensions').get('window');
+const deviceWidth = windowSize.width;
+const deviceHeight = windowSize.height;
 
-    componentWillMount() {
-        if (Platform.OS === 'android' && !Constants.isDevice) {
-            this.setState({
-                errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-            });
-        } else {
-            this._getLocationAsync();
-        }
-    }
-
-    _getLocationAsync = async () => {
-        let { status } = await Permissions.askAsync(Permissions.LOCATION);
-        if (status !== 'granted') {
-            this.setState({
-                errorMessage: 'Permission to access location was denied',
-            });
-        }
-
-        let location = await Location.getCurrentPositionAsync({});
-        this.setState({ location });
-    };
-
-    render(){
-        let text = 'Wartet...';
-        if(this.state.errorMessage){
-            text = this.state.errorMessage;
-        }else if(this.state.location){
-            text = JSON.stringify(this.state.location);
-        }
+class SearchBar extends Component {
+    render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.paragraph}>{text}</Text>
+            <View style={{ paddingTop: Constants.statusBarHeight, flex: 1 }}>
+                <GooglePlacesAutocomplete
+                    placeholder="Search"
+                    minLength={2}
+                    autoFocus={false}
+                    returnKeyType={'search'}
+                    listViewDisplayed="auto"
+                    fetchDetails={true}
+                    renderDescription={row => row.description}
+                    onPress={(data, details = null) => {
+                        console.log(data);
+                        console.log(details);
+                    }}
+                    getDefaultValue={() => {
+                        return '';
+                    }}
+                    query={{
+                        key: 'AIzaSyCXrHDPB6rlSWwu8Sy7JLrUxTpG8XHDPig',
+                        language: 'de',
+                        components: 'country:ch',
+                        types: 'address',
+                    }}
+                    styles={{
+                        description: {
+                            fontWeight: 'bold',
+                        },
+                        predefinedPlacesDescription: {
+                            color: '#1faadb',
+                        },
+                        listView:{
+                            position: 'absolute',
+                            height: deviceHeight,
+                            width: deviceWidth,
+                        },
+                    }}
+                    currentLocation={false}
+                    currentLocationLabel="Aktueller Standort"
+                    nearbyPlacesAPI="GooglePlacesSearch"
+                    GoogleReverseGeocodingQuery={{
+                        // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
+                    }}
+                    GooglePlacesSearchQuery={{
+                        // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
+                        rankby: 'distance',
+                        types: 'food',
+                    }}
+                />
             </View>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: Constants.statusBarHeight,
-        backgroundColor: '#ecf0f1',
-    },
-    paragraph: {
-        margin: 24,
-        fontSize: 18,
-        textAlign: 'center',
-    },
-});
 
 export default SearchBar;

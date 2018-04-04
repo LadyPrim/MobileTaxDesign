@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import t from 'tcomb-form-native';
 import { View } from 'react-native';
 
@@ -89,6 +89,7 @@ const formStyle = {
     },
 };
 
+
 const options = {
     fields: {
         address: {
@@ -138,5 +139,6 @@ class AddressForm extends Component{
         );
     }
 }
+
 
 export default AddressForm;

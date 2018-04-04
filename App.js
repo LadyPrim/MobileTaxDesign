@@ -3,7 +3,7 @@ import {Component} from 'react';
 import {StackNavigator, } from 'react-navigation';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import AddressForm from './src/components/AddressForm/AddressForm'
-import Header from './src/components/Header/Header';
+import Header from './src/components/AppHeader/AppHeader';
 import {Font} from 'expo';
 import SearchBar from "./src/components/SearchBar/SearchBar";
 
@@ -17,7 +17,10 @@ class HomeScreen extends Component {
     render(){
         return(
             <View>
-
+                <Button
+                    title="Go to Address form"
+                    onPress={() => this.props.navigation.navigate('Address')}
+                />
             </View>
         )
     }
@@ -25,9 +28,12 @@ class HomeScreen extends Component {
 }
 
 class AddressScreen extends Component{
+    static navigationOptions = {
+        headerTitle: 'Deine Adresse',
+    };
     render(){
         return(
-            <View>
+            <View style={{backgroundColor: '#ffffff'}}>
                 <View>
                     <SearchBar/>
                     <AddressForm/>
@@ -44,16 +50,27 @@ const RootStack = StackNavigator(
             screen: HomeScreen,
         },
         Address: {
-            screen: AddressScreen},
+            screen: AddressScreen
+        },
     },
     {
-        initialRouteName: 'Address',
+        initialRouteName: 'Home',
+
+        navigationOptions:{
+            headerStyle:{
+                backgroundColor: '#D3E7F5'
+            },
+            headerTitleStyle:{
+                color: '#fff',
+                fontWeight: 'normal',
+                fontSize: 28,
+            },
+        }
     }
 );
 
 
 
-// AddressScreen
 export default class App extends Component {
     componentDidMount() {
         Font.loadAsync({
@@ -66,5 +83,6 @@ export default class App extends Component {
     }
 
 }
+
 
 
