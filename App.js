@@ -1,7 +1,8 @@
 import React from 'react';
 import {Component} from 'react';
+
 import RootStack from './src/screens/RootStack';
-import { Button } from 'react-native';
+
 import {Font} from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 

@@ -1,36 +1,18 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import t from 'tcomb-form-native';
+
 import { View } from 'react-native';
 
 const Form = t.form.Form;
 
 const Kantons = t.enums({
-    ag: 'AG',
-    ai: 'AI',
-    ar: 'AR',
-    be: 'BE',
-    bl: 'BL',
-    bs: 'BS',
-    fr: 'FR',
-    ge: 'GE',
-    gl: 'GL',
-    gr: 'GR',
-    ju: 'JU',
-    lu: 'LU',
-    ne: 'NE',
-    nw: 'NW',
-    ow: 'OW',
-    sg: 'SG',
-    sh: 'SH',
-    so: 'SO',
-    sz: 'SZ',
-    tg: 'TG',
-    ti: 'TI',
-    ur: 'UR',
-    vd: 'VD',
-    vs: 'VS',
-    zg: 'ZG',
-    zh: 'ZH',
+    ag: 'AG', ai: 'AI', ar: 'AR', be: 'BE',
+    bl: 'BL', bs: 'BS', fr: 'FR', ge: 'GE',
+    gl: 'GL', gr: 'GR', ju: 'JU', lu: 'LU',
+    ne: 'NE', nw: 'NW', ow: 'OW', sg: 'SG',
+    sh: 'SH', so: 'SO', sz: 'SZ', tg: 'TG',
+    ti: 'TI', ur: 'UR', vd: 'VD', vs: 'VS',
+    zg: 'ZG', zh: 'ZH',
 });
 
 const User = t.struct({
@@ -98,15 +80,15 @@ const options = {
         },
         plz: {
             label: 'Postleitzahl',
-            error: '',
+            error: 'Bitte eine gültige Postleitzahl eingeben',
         },
         ort: {
             label: 'Ort',
-            error: '',
+            error: 'Bitte eine gültige Ortschaft angeben',
         },
         kanton:{
             label: 'Kanton',
-            error: '',
+            error: 'Bitte einen Kanton auswählen',
         },
     },
     stylesheet: formStyle,
@@ -120,7 +102,6 @@ class AddressForm extends Component{
             title: params ? params.otherParam: ' Adresse ',
         }
     };
-
     handleSubmit = () => {
         const value = this._form.getValue();
         console.log('value: ', value);

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Constants} from 'expo';
 import {View} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {geocodeByAddress, geocodeByPlaceId} from 'react-native-google-places-autocomplete';
 
 const windowSize = require('Dimensions').get('window');
 const deviceWidth = windowSize.width;
@@ -16,8 +15,6 @@ class SearchBar extends Component {
                     placeholder="Search"
                     minLength={2}
                     autoFocus={false}
-                    returnKeyType={'search'}
-                    listViewDisplayed="auto"
                     fetchDetails={true}
                     renderDescription={row => row.description}
                     onPress={(data, details = null) => {
