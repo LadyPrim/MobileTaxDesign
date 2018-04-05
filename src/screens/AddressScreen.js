@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {View, Button, StyleSheet} from 'react-native';
 
 import AddressForm from '../components/AddressForm/AddressForm';
-import SearchBar from "../components/SearchBar/GoogleSearchBar";
 //import BackButtonHeader from "../components/BackButtonHeader";
 
 class AddressScreen extends React.Component{

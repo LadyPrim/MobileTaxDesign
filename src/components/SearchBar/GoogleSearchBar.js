@@ -12,9 +12,10 @@ class SearchBar extends Component {
         return (
             <View style={{ paddingTop: Constants.statusBarHeight, flex: 1 }}>
                 <GooglePlacesAutocomplete
-                    placeholder="Search"
+                    placeholder="Strasse, PLZ"
                     minLength={2}
                     autoFocus={false}
+                    listViewDisplayed = 'auto'
                     fetchDetails={true}
                     renderDescription={row => row.description}
                     onPress={(data, details = null) => {
@@ -31,10 +32,20 @@ class SearchBar extends Component {
                         types: 'address',
                     }}
                     styles={{
+                        container:{
+                            //backgroundColor: '#fff',
+                        },
+                        textInputContainer:{
+                            backgroundColor: '#fff',
+                            borderTopWidth: 0,
+                            borderBottomWidth: 1,
+                            borderBottomColor: '#828282',
+                        },
                         description: {
                             fontWeight: 'bold',
                         },
                         predefinedPlacesDescription: {
+
                             color: '#1faadb',
                         },
                         listView:{
@@ -43,8 +54,9 @@ class SearchBar extends Component {
                             width: deviceWidth,
                         },
                     }}
-                    currentLocation={false}
+                    currentLocation={true}
                     currentLocationLabel="Aktueller Standort"
+
                     nearbyPlacesAPI="GooglePlacesSearch"
                     GoogleReverseGeocodingQuery={{
                         // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro

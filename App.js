@@ -1,17 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
-
 import RootStack from './src/screens/RootStack';
-
 import {Font} from 'expo';
-import {Ionicons} from '@expo/vector-icons';
-
-
-
-
-//Navigation
-
-
 
 
 export default class App extends Component {
@@ -22,7 +12,9 @@ export default class App extends Component {
     }
 
     render(){
-        return <RootStack />;
+        return (
+           <RootStack />
+        );
     }
 
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import t from 'tcomb-form-native';
 
-import { View } from 'react-native';
+import { View, Button } from 'react-native';
 
 const Form = t.form.Form;
 
@@ -95,16 +95,13 @@ const options = {
 };
 
 class AddressForm extends Component{
-    static navigationOptions = ({navigation}) => {
-        const {params} = navigation.state;
 
-        return{
-            title: params ? params.otherParam: ' Adresse ',
-        }
-    };
     handleSubmit = () => {
         const value = this._form.getValue();
-        console.log('value: ', value);
+        if(value){
+            console.log('value: ', value);
+        }
+
     };
     render() {
         return (
@@ -114,6 +111,10 @@ class AddressForm extends Component{
                         ref={c => this._form = c}
                         type={User}
                         options={options}
+                    />
+                    <Button
+                        title="Speichern"
+                        onPress={this.handleSubmit}
                     />
                 </View>
             </View>
